@@ -7,12 +7,26 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
+  def create
+    @post = Post.new
+
+    if @post.valid?
+      @post.save
+      redirect_to post_path(@post)
+    else
+      render :new
+    end
+  end
+
   def update
     @post = Post.find(params[:id])
+    
+    if @post.update(post_params)
 
-    @post.update(post_params)
-
-    redirect_to post_path(@post)
+      redirect_to post_path(@post)
+    else
+      render :edit
+    end
   end
 
   private
