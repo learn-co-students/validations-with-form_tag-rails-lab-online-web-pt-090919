@@ -1,15 +1,20 @@
 class AuthorsController < ApplicationController
-  def show
-    @author = Author.find(params[:id])
-  end
 
   def new
     @author = Author.new
   end
 
+  def index
+    @authors = Author.all
+  end
+
+  def show
+    @author = author_find
+  end
+
   def create
     @author = Author.new(author_params)
-    
+
     if @author.valid?
       @author.save
       redirect_to author_path(@author)
@@ -17,7 +22,7 @@ class AuthorsController < ApplicationController
       render :new
     end
   end
-  
+
   def edit
     @author = author_find
   end
@@ -27,8 +32,8 @@ class AuthorsController < ApplicationController
   def author_params
     params.permit(:name, :email, :phone_number)
   end
-  
+
   def author_find
-    Author.Find(params[:id])
+    Author.find_by(params[:id])
   end
 end
