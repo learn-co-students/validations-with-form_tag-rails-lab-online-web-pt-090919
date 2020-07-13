@@ -1,19 +1,19 @@
 class PostsController < ApplicationController
   def show
-    @post = Post.find(params[:id])
+    @post = Post.find(params[:id]) # find a certain post
   end
 
   def edit
-    @post = Post.find(params[:id])
+    @post = Post.find(params[:id]) # edit a certain post
   end
 
   def update
-    @post = Post.find(params[:id])
+    @post = Post.find(params[:id]) # find a certain post
 
-    if @post.update(post_params)
-      redirect_to post_path(@post)
+    if @post.update(post_params) # update the params, like `title`, `category` and `content`
+      redirect_to post_path(@post) # show the certain post
     else 
-      render :edit 
+      render :edit # edit the post
     end 
   end
 
